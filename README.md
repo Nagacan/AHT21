@@ -27,3 +27,5 @@ Micro SD-Card Reader/Adapter
 
 [Adapter](https://www.amazon.com/Reader-Adapter-Camera-Memory-Wansurs/dp/B0B9QZ4W4Y?crid=1NRJQU9RFIEUX&dib=eyJ2IjoiMSJ9.aZ5CyI1seaCTFVUzT0NlJpD8dyQjzqiqAURiyClSNrH2BGRKFKbUrMzzF59pt43S0IFH3E6I00N6K6GSyrhpmx3imwonNx4xzcFtk9ZzN4DJMNFZl6cg6qMy5rCOA6W2LOXlkYWOTcdxbBAmjkMfaEBSL3PMtZakDS_UNtSwuSrGZeT5n0gP3ZLp572kA636_A4iDL-Rms6Z5qR8qW5fw_pHX3N3wMLKtk3T0xdtz6U.9WVDsjNrwOKz5CJDiLGtSr47cc6gQd7MSiG2myKHeTE&dib_tag=se&keywords=micro+sd+card+adapter&qid=1740176655&sprefix=micro+sd+card+adapt%2Caps%2C207&sr=8-4)
 
+## Setting Up the Raspberry Pi (headless)
+
