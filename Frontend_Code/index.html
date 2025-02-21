@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Temperature and Humidity Graphs</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<style>
+    	body {
+        	font-family: Arial, sans-serif;
+        	margin: 0;
+        	padding: 0;
+        	background-color: #f4f4f4;
+        	text-align: center;
+    	}
+    	h1, h2, h3 {
+        	margin-top: 20px;
+    	}
+    	.top-links {
+        	margin-top: 10px;
+    	}
+    	.top-links a {
+        	display: block;
+        	text-decoration: none;
+        	color: blue;
+        	font-size: 18px;
+        	margin-bottom: 5px;
+    	}
+    	.charts-container {
+        	display: flex;
+        	flex-wrap: wrap;
+        	justify-content: center;
+        	gap: 20px;
+        	margin-top: 20px;
+    	}
+    	.chart-wrapper {
+        	width: 90%;
+        	max-width: 900px;
+        	height: 450px;
+    	}
+    	canvas {
+        	max-width: 100%;
+        	max-height: 100%;
+    	}
+    	.dropdown-container {
+        	margin: 20px 0;
+    	}
+    	.historical-chart-container {
+        	display: flex;
+        	flex-direction: column;
+        	align-items: center;
+        	justify-content: center;
+        	margin-top: 40px;
+        	width: 100%;
+    	}
+    	.historical-chart-wrapper {
+        	width: 80%;
+        	max-width: 900px;
+        	height: 450px;
+    	}
+    	@media screen and (max-width: 768px) {
+        	.charts-container {
+            	flex-direction: column;
+            	align-items: center;
+        	}
+    	}
+	</style>
+</head>
+<body>
+
+	<!-- Top Navigation Links -->
+	<div class="top-links">
+    	<a href="/history.html">View Historical Data</a>
+    	<a id="temp-now" target="_blank">Temperature Now</a>
+    	<a id="json-history" target="_blank">JSON Historical Data</a>
+	</div>
+
+	<h1>Real-Time Temperature and Humidity</h1>
+
+	<!-- Real-time Graphs -->
+	<div class="charts-container">
+    	<div class="chart-wrapper">
+        	<h3>Humidity (%)</h3>
+        	<canvas id="humidityChart"></canvas>
+    	</div>
+    	<div class="chart-wrapper">
+        	<h3>Temperature (°C)</h3>
+        	<canvas id="temperatureChart"></canvas>
+    	</div>
+	</div>
+
+	<!-- Historical Data Section -->
+	<div class="historical-chart-container">
+    	<h2>Historical Data</h2>
+    	<div class="dropdown-container">
+        	<label for="date-select">Select Date: </label>
+        	<select id="date-select" onchange="fetchHistoricalGraph()">
+            	<option value="">Loading...</option>
+        	</select>
+    	</div>
+    	<div class="historical-chart-wrapper">
+        	<canvas id="historicalChart"></canvas>
+    	</div>
+	</div>
+
+	<script>
+    	const baseURL = `http://${window.location.hostname}:5000`;
+
+    	// Update navigation links dynamically
+    	document.getElementById("temp-now").href = `${baseURL}/data`;
+    	document.getElementById("json-history").href = `${baseURL}/history`;
+
+    	let historyData = [];
+    	const timeLabels = [];
+    	const temperatureData = [];
+    	const humidityData = [];
+    	const maxDataPoints = 50;
+
+    	// Create Charts
+    	const createChart = (ctx, label, borderColor) => new Chart(ctx, {
+        	type: 'line',
+        	data: {
+            	labels: timeLabels,
+            	datasets: [{
+                	label,
+                	data: [],
+                	borderColor,
+                	backgroundColor: `${borderColor}20`,
+                	fill: false
+            	}]
+        	},
+        	options: {
+            	responsive: true,
+            	maintainAspectRatio: false,
+            	animation: { duration: 500 },
+            	scales: {
+                	x: {
+                    	title: { display: true, text: 'Time (HH:MM:SS)' },
+                    	ticks: { autoSkip: true, maxTicksLimit: 10 }
+                	},
+                	y: {
+                    	title: { display: true, text: label },
+                    	min: 0,
+                    	max: label.includes("Humidity") ? 100 : 50
+                	}
+            	}
+        	}
+    	});
+
+    	const humidityChart = createChart(document.getElementById('humidityChart').getContext('2d'), 'Humidity (%)', 'blue');
+    	const temperatureChart = createChart(document.getElementById('temperatureChart').getContext('2d'), 'Temperature (°C)', 'red');
+
+    	async function updateRealTimeData() {
+        	try {
+            	const response = await fetch(`${baseURL}/data`);
+            	if (!response.ok) throw new Error("Failed to fetch real-time data");
+
+            	const json = await response.json();
+            	const { time, temperature, humidity } = json;
+
+            	if (timeLabels.length >= maxDataPoints) {
+                	timeLabels.shift();
+                	temperatureData.shift();
+                	humidityData.shift();
+            	}
+
+            	timeLabels.push(time);
+            	temperatureData.push(temperature);
+            	humidityData.push(humidity);
+
+            	temperatureChart.data.labels = timeLabels;
+            	temperatureChart.data.datasets[0].data = temperatureData;
+            	temperatureChart.update();
+
+humidityChart.data.labels = timeLabels;
+humidityChart.data.datasets[0].data = humidityData;
+humidityChart.update();
+        	} catch (error) {
+            	console.error("Error fetching sensor data:", error);
+        	}
+    	}
+
+    	setInterval(updateRealTimeData, 2000);
+
+    	// Restore the original historical graph with dual y-axes
+    	const historicalChart = new Chart(document.getElementById("historicalChart").getContext("2d"), {
+        	type: "line",
+        	data: {
+            	labels: [],
+            	datasets: [
+                	{
+                    	label: "Temperature (°C)",
+                    	data: [],
+                    	borderColor: "red",
+                    	backgroundColor: "rgba(255, 0, 0, 0.1)",
+                    	fill: false,
+                    	yAxisID: "temperature-axis",
+                    	pointRadius:0,
+                    	pointHoverRadius:5
+                	},
+                	{
+                    	label: "Humidity (%)",
+                    	data: [],
+                    	borderColor: "blue",
+                    	backgroundColor: "rgba(0, 0, 255, 0.1)",
+                    	fill: false,
+                    	yAxisID: "humidity-axis",
+                    	pointRadius:0,
+                    	pointHoverRadius:5
+                	}
+            	]
+        	},
+        	options: {
+            	responsive: true,
+            	maintainAspectRatio: false,
+            	animation: { duration: 500 },
+            	scales: {
+                	x: { title: { display: true, text: "Time (HH:MM:SS)" }, ticks: { autoSkip: true, maxTicksLimit: 10 } },
+                	"temperature-axis": { type: "linear", position: "left", title: { display: true, text: "Temperature (°C)" }, min: 0, max: 50 },
+                	"humidity-axis": { type: "linear", position: "right", title: { display: true, text: "Humidity (%)" }, min: 0, max: 100 }
+            	}
+        	}
+    	});
+
+    	async function fetchHistoryDates() {
+        	try {
+            	const response = await fetch(`${baseURL}/history`);
+            	if (!response.ok) throw new Error("Failed to fetch history data");
+
+            	historyData = await response.json();
+            	const dateSelect = document.getElementById("date-select");
+            	dateSelect.innerHTML = historyData.length ? '<option value="">-- Select a Date --</option>' : '<option value="">No data available</option>';
+
+            	historyData.forEach(day => {
+                	const option = document.createElement("option");
+                	option.value = day.date;
+                	option.innerText = day.date;
+                	dateSelect.appendChild(option);
+            	});
+        	} catch (error) {
+            	console.error("Error fetching history:", error);
+        	}
+    	}
+
+    	function fetchHistoricalGraph() {
+        	const selectedDate = document.getElementById("date-select").value;
+        	const selectedDay = historyData.find(day => day.date === selectedDate);
+        	if (!selectedDay) return;
+
+        	historicalChart.data.labels = selectedDay.times;
+        	historicalChart.data.datasets[0].data = selectedDay.temperatures;
+        	historicalChart.data.datasets[1].data = selectedDay.humidities;
+        	historicalChart.update();
+    	}
+
+    	fetchHistoryDates();
+	</script>
+
+</body>
+</html>
+
+
+
