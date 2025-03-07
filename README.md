@@ -125,6 +125,11 @@ Configure Nginx as a reverse proxy to point to your Flask app. Edit the Nginx co
 sudo nano /etc/nginx/sites-available/default
 (replace everything in this file with everything in the file i provided in NGINX_setup, or just import the file I provided and replace it with the one already there)
 
+Install a database:
+sudo apt install sqlite3
+pip install flask-cors
+
+
 Create the backend 
 sudo nano backend.py, and replace everything in here with the file provided or just import the file i provided in that directory (directory and name of the file matters)
 
@@ -132,6 +137,11 @@ Do the same with the two front ends
 sudo nano /var/www/html/index.html
 sudo nano /var/www/html/history.html
 
-Do the same for the system file (This is important though, you may need to change the directory and address accordingly)
+Do the same for the system file (This is important though, you may need to change the directory and address accordingly), so go into the system (backend.service) file that I provided and read the directioins
+or in other words, just change all of the hostnames to your hostname. 
 sudo nano /etc/systemd/system/backend.service
 
+Once you're done. sudo systemctl daemon-reload to restart the service and do these in order
+sudo systemctl enable backend.service       -enables the service
+sudo systemctl start backend2.service       -starts the service 
+sudo systemctl status backend2.service    -checks status of the service
