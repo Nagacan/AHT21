@@ -35,7 +35,7 @@ In services, enable SSH and use Password Auth, you can set that hostname to anyt
 I will use eduroam, and password, as the SSID and password. WIreless LAN country as US. America los angelos as local settings, and keyboard as US. Telemetry can be enabled (mine is checked). Apply the change (this will wipe eveyrthing previously on it). Should take a few minutes to finish. Take a picture or something of these settings. You will need them.
 Once it's finished. Go into the file bootfs folder, and then make two text files. One name it as "ssh", and nothing else , and the other "wpa_supplicant.txt" (or download and import the supplicant file I'm using)- you want to have everything in there the same and adjusted to your own settings. Once you're done, or whenever u want you can change it to "wpa_supplicant.conf", however you migth need an application to access it.
 
-It might take a while to connect. And sometimes, since it's an intial start up, it won't connect. I would reccomend you to plug it in, leave it in with the hotspot on (automatically connects) for about 5 minutes. Then if nothing shows up connected, unplug it, and replug. After waiting about 5 mins, I unplug and replugged it in and it connected to my hotspot after about 2 minutes. 
+. Then eject the Sd card from your computter and put it in the RPI, and then plug your RPI in using a micro usb cable. It might take a while to connect. And sometimes, since it's an intial start up, it won't connect. I would reccomend you to plug it in, leave it in with the hotspot on (automatically connects) for about 5 minutes. Then if nothing shows up connected, unplug it, and replug. After waiting about 5 mins, I unplug and replugged it in and it connected to my hotspot after about 2 minutes. 
 
 to ssh (secure shell (protocol); remotely connect; the raspberry pi is a microcomputer) into the PI go to the command terminal and type "ssh raspberrypi.local"; this is because I unchcked the host name as a result it's the default name, if you have a personal name for it use "ssh username@hostname.local", "ssh username@<IP_ADDRESS>" if you have the IP address of the PI. The username is the username you previously set (with it's password)
 
@@ -61,7 +61,7 @@ i2c-tools – Installs utilities to interact with I²C devices from the command 
     i2cset (write to an I²C device)
     i2cdump (dump contents of an I²C device)
 
-Now you need to install the senesor library, for this you need to make a virtual environment. because Debian-based systems (including Raspberry Pi OS) now use a stricter package management system to prevent conflicts between system-installed and user-installed Python packages
+Now you need to install the senesor library, for this you need to make a virtual environment. because Debian-based systems (including Raspberry Pi OS)  use a stricter package management system to prevent conflicts between system-installed and user-installed Python packages
 Type this into the terminal
 mkdir ~/AHT21 #(this makes a folder in the directory called AHT21; to keep everything organized)
 then go into tthe folder with cd AHT21/ ## important, always remember to go into this folder, to get access to the folders etc, or clarify your directory/file location.
@@ -69,7 +69,7 @@ then go into tthe folder with cd AHT21/ ## important, always remember to go into
 python3 -m venv environment (this makes a vietual eniroment called environemnt) (this one might take a minute about 2-3 ), then type into the terminal 
 source environment/bin/activate (activate and uses the environemnt, download the external libraries and installations here)
 
-then "pip3 install adafruit-circuitpython-ahtx0" - will take a while, about 2-3 or maybe 5 mins. if it says warning retrying after connection broken don't worry, just leave it and let it finish. Be sure not to press any buttons or disturb it (cntrl c should kill the command)
+then "pip3 install adafruit-circuitpython-ahtx0" - will take a while, about 2-3 or maybe 5 mins. if it says warning retrying after connection broken don't worry, just leave it and let it finish. Be sure not to press any buttons or disturb it (cntrl c kills the command)
 Every time you want to use this environment, activate it with:
 
 source environment/bin/activate
