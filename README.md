@@ -43,6 +43,11 @@ type y then enter to continue connecting. It will give you a fingerprint, type y
 
 Update software to the latest version using “sudo apt-get update”
 Using “sudo raspi-config” changed the password to make sure it was “paul393875” and you can configure it in system configure and then change password.
+before you do anything as well.
+do the sudo raspi config
+Go to:Interfacing Options → I2C → Enable
+then reboot the pi, usingn sudo reboot
+
  “sudo apt install -y build-essential git libi2c-dev i2c-tools” which is basically just downloading the libraries. (-y automatically confirms the installation, so you don’t have to manually type Y when prompted.)
 - build-essential – Installs essential development tools, including:
 
@@ -145,3 +150,6 @@ Once you're done. sudo systemctl daemon-reload to restart the service and do the
 sudo systemctl enable backend.service       -enables the service
 sudo systemctl start backend2.service       -starts the service 
 sudo systemctl status backend2.service    -checks status of the service
+
+fixed some of the databases and locations of the addresses in the backend and the system file code. 
+Previously my backend also didn't create a table in the sqlite database so I've included that
