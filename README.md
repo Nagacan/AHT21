@@ -118,3 +118,19 @@ then source environment/bin/activate
 to get into the folder/directory and then actiavting the envinroment
 
 http://192.168.137.8/ is my page
+
+Creating the system file, backend, and frontends (make sure  you do all of this in the AHT21/ directory, and in your environment just to be safe). 
+backedn:
+Configure Nginx as a reverse proxy to point to your Flask app. Edit the Nginx configuration file to forward requests from /data to your Flask backend in your virtual environment 
+sudo nano /etc/nginx/sites-available/default
+(replace everything in this file with everything in the file i provided in NGINX_setup, or just import the file I provided and replace it with the one already there)
+
+Create the backend 
+sudo nano backend.py, and replace everything in here with the file provided or just import the file i provided in that directory (directory and name of the file matters)
+
+Do the same with the two front ends
+sudo nano /var/www/html/index.html
+sudo nano /var/www/html/history.html
+
+Do the same for the system file
+sudo nano /etc/systemd/system/backend2.service
