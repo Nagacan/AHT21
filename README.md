@@ -105,3 +105,10 @@ echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 
 then to install nginx
 sudo apt update
 sudo apt install nginx
+
+if you want to find out your hostname or ip address type into the terminal
+hostname or hostname -I
+
+After nginx is installed you can access your website on 
+http://<<IP_Address_Here>>
+or just type your IP address into the brwoser
