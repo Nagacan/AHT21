@@ -1,4 +1,4 @@
-[Unit] ###important, replace everything that says hostname with YOUR hostname
+[Unit] ###important, replace everything that says hostname with YOUR hostname (type pwd, this prints the directory location and u can find the hostname from that )
 Description=Backend Service for Temperature and Humidity
 After=network.target
 
@@ -13,8 +13,8 @@ WorkingDirectory=/home/hostname/AHT21
 Restart=always
 
 # Run as the specified user and group
-User=paul393875
-Group=paul393875
+User=hostname
+Group=hostname
 
 # Pass environment variables if needed
 Environment=PYTHONUNBUFFERED=1
