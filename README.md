@@ -132,5 +132,6 @@ Do the same with the two front ends
 sudo nano /var/www/html/index.html
 sudo nano /var/www/html/history.html
 
-Do the same for the system file
-sudo nano /etc/systemd/system/backend2.service
+Do the same for the system file (This is important though, you may need to change the directory and address accordingly)
+sudo nano /etc/systemd/system/backend.service
+
