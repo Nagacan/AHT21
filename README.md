@@ -30,4 +30,78 @@ Micro SD-Card Reader/Adapter
 [Adapter](https://www.amazon.com/Reader-Adapter-Camera-Memory-Wansurs/dp/B0B9QZ4W4Y?crid=1NRJQU9RFIEUX&dib=eyJ2IjoiMSJ9.aZ5CyI1seaCTFVUzT0NlJpD8dyQjzqiqAURiyClSNrH2BGRKFKbUrMzzF59pt43S0IFH3E6I00N6K6GSyrhpmx3imwonNx4xzcFtk9ZzN4DJMNFZl6cg6qMy5rCOA6W2LOXlkYWOTcdxbBAmjkMfaEBSL3PMtZakDS_UNtSwuSrGZeT5n0gP3ZLp572kA636_A4iDL-Rms6Z5qR8qW5fw_pHX3N3wMLKtk3T0xdtz6U.9WVDsjNrwOKz5CJDiLGtSr47cc6gQd7MSiG2myKHeTE&dib_tag=se&keywords=micro+sd+card+adapter&qid=1740176655&sprefix=micro+sd+card+adapt%2Caps%2C207&sr=8-4)
 
 ## Setting Up the Raspberry Pi (headless)
+Download, Raspberry Pi Imager, and flash it on your raspberry pi SD card
+In services, enable SSH and use Password Auth, you can set that hostname to anything I will uncheck it. set your username and password to anything - mine is admin, admin, and configuer wireless LAN (used to connect to your own hotspot or wifi)
+I will use eduroam, and password, as the SSID and password. WIreless LAN country as US. America los angelos as local settings, and keyboard as US. Telemetry can be enabled (mine is checked). Apply the change (this will wipe eveyrthing previously on it). Should take a few minutes to finish. Take a picture or something of these settings. You will need them.
+Once it's finished. Go into the file bootfs folder, and then make two text files. One name it as "ssh", and nothing else , and the other "wpa_supplicant.txt" (or download and import the supplicant file I'm using)- you want to have everything in there the same and adjusted to your own settings. Once you're done, or whenever u want you can change it to "wpa_supplicant.conf", however you migth need an application to access it.
 
+It might take a while to connect. And sometimes, since it's an intial start up, it won't connect. I would reccomend you to plug it in, leave it in with the hotspot on (automatically connects) for about 5 minutes. Then if nothing shows up connected, unplug it, and replug. After waiting about 5 mins, I unplug and replugged it in and it connected to my hotspot after about 2 minutes. 
+
+to ssh into the PI go to the command terminal and type "ssh raspberrypi.local"; this is because I unchcked the host name as a result it's the default name, if you have a personal name for it use "ssh username@hostname.local", "ssh username@<IP_ADDRESS>" if you have the IP address of the PI. The username is the username you previously set (with it's password)
+
+type y then enter to continue connecting. It will give you a fingerprint, type yes, you don't need this and there are ways to find the Pi's fingerprint. Type in your password (note here when you type the password it won't show anything, or indicate that you are typing). Once done with password type enter. 
+
+Update software to the latest version using “sudo apt-get update”
+Using “sudo raspi-config” changed the password to make sure it was “paul393875” and you can configure it in system configure and then change password.
+ “sudo apt install -y build-essential git libi2c-dev i2c-tools” which is basically just downloading the libraries. (-y automatically confirms the installation, so you don’t have to manually type Y when prompted.)
+- build-essential – Installs essential development tools, including:
+
+    gcc (GNU C Compiler)
+    g++ (GNU C++ Compiler)
+    make (build automation tool)
+    Other development utilities
+
+git – Installs Git, a version control system used for cloning and managing repositories.
+
+libi2c-dev – Installs development libraries for working with the I²C (Inter-Integrated Circuit) protocol, allowing your Raspberry Pi to communicate with I²C devices.
+
+i2c-tools – Installs utilities to interact with I²C devices from the command line, such as:
+    i2cdetect (scan for I²C devices)
+    i2cget (read from an I²C device)
+    i2cset (write to an I²C device)
+    i2cdump (dump contents of an I²C device)
+
+Now you need to install the senesor library, for this you need to make a virtual environment. because Debian-based systems (including Raspberry Pi OS) now use a stricter package management system to prevent conflicts between system-installed and user-installed Python packages
+Type this into the terminal
+mkdir ~/AHT21 #(this makes a folder in the directory called AHT21; to keep everything organized)
+then go into tthe folder with cd AHT21/ ## important, always remember to go into this folder, to get access to the folders etc, or clarify your directory/file location.
+
+python3 -m venv environment (this makes a vietual eniroment called environemnt) (this one might take a minute about 2-3 ), then type into the terminal 
+source environment/bin/activate (activate and uses the environemnt, download the external libraries and installations here)
+
+then "pip3 install adafruit-circuitpython-ahtx0" - will take a while, about 2-3 or maybe 5 mins. if it says warning retrying after connection broken don't worry, just leave it and let it finish. Be sure not to press any buttons or disturb it (cntrl c should kill the command)
+Every time you want to use this environment, activate it with:
+
+source environment/bin/activate
+"deactivate" if you want to get out
+
+isntall flask 
+pip3 install flask (might takke 5 minis)
+
+https://nginx.org/en/linux_packages.html#Debian
+follow this website
+Do everything it says under Debian in the putty terminal, inside the correct directory and virtual environment 
+
+sudo apt install curl gnupg2 ca-certificates lsb-release debian-archive-keyring
+
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+    | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+
+gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+http://nginx.org/packages/debian `lsb_release -cs` nginx" \
+    | sudo tee /etc/apt/sources.list.d/nginx.list
+
+(apt repository for stable nginx packages) OR (mainline nginx packages) - doesnt matter (i just installed both)
+    
+echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" \
+    | sudo tee /etc/apt/sources.list.d/nginx.list
+
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
+    | sudo tee /etc/apt/preferences.d/99nginx
+
+then to install nginx
+sudo apt update
+sudo apt install nginx
