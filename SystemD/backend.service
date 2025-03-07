@@ -1,13 +1,13 @@
-[Unit]
+[Unit] ###important, replace everything that says hostname with YOUR hostname
 Description=Backend Service for Temperature and Humidity
 After=network.target
 
 [Service]
 # Command to run your script
-ExecStart=/home/paul393875/AHT21/bin/python /home/paul393875/AHT21/backend.py
+ExecStart=/home/hostname/AHT21/bin/python /home/hostname/AHT21/backend.py
 
 # Ensure the working directory is correct
-WorkingDirectory=/home/paul393875/AHT21
+WorkingDirectory=/home/hostname/AHT21
 
 # Restart the service if it crashes
 Restart=always
