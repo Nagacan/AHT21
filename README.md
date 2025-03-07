@@ -112,3 +112,9 @@ hostname or hostname -I
 After nginx is installed you can access your website on 
 http://<<IP_Address_Here>>
 or just type your IP address into the brwoser
+
+remmber cd AHT21/
+then source environment/bin/activate
+to get into the folder/directory and then actiavting the envinroment
+
+http://192.168.137.8/ is my page
