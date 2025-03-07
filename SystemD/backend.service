@@ -1,20 +1,21 @@
-[Unit] ###important, replace everything that says hostname with YOUR hostname (type pwd, this prints the directory location and u can find the hostname from that )
+[Unit]
+#important, replace everything that says hostname with YOUR hostname (type pwd, this prints the directory location and u can find the hostname from that )
 Description=Backend Service for Temperature and Humidity
 After=network.target
 
 [Service]
 # Command to run your script
-ExecStart=/home/hostname/AHT21/bin/python /home/hostname/AHT21/backend.py
+ExecStart=/home/admin/AHT21/environment/bin/python3 /home/admin/AHT21/backend.py
 
 # Ensure the working directory is correct
-WorkingDirectory=/home/hostname/AHT21
+WorkingDirectory=/home/admin/AHT21
 
 # Restart the service if it crashes
 Restart=always
 
 # Run as the specified user and group
-User=hostname
-Group=hostname
+User=admin
+Group=admin
 
 # Pass environment variables if needed
 Environment=PYTHONUNBUFFERED=1
