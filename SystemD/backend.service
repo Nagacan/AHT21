@@ -15,7 +15,6 @@ Restart=always
 
 # Run as the specified user and group
 User=admin
-Group=admin
 
 # Pass environment variables if needed
 Environment=PYTHONUNBUFFERED=1
