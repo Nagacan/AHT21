@@ -1,27 +1,13 @@
 [Unit]
-#important, replace everything that says hostname with YOUR hostname (type pwd, this prints the directory location and u can find the hostname from that )
-Description=Backend Service for Temperature and Humidity
+Description=Temperature and Humidity Sensor Backend
 After=network.target
 
 [Service]
-# Command to run your script
-ExecStart=/home/admin/AHT21/environment/bin/python3 /home/admin/AHT21/backend.py
-
-# Ensure the working directory is correct
-WorkingDirectory=/home/admin/AHT21
-
-# Restart the service if it crashes
+ExecStart=/home/%u/AHT21/environment/bin/python3 /home/%u/AHT21/backend.py
+WorkingDirectory=/home/%u/AHT21
 Restart=always
-
-# Run as the specified user and group
-User=admin
-
-# Pass environment variables if needed
+User=%u
 Environment=PYTHONUNBUFFERED=1
-
-# Log directly to the journal for easy debugging
-StandardOutput=journal
-StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
