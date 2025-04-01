@@ -9,7 +9,7 @@ SERVICE_TEMPLATE="SystemD/backend.service"
 SERVICE_DEST="/etc/systemd/system/backend.service"
 
 # === Update & Install System Packages ===
-echo "[1/8] Updating system packages..."
+echo "[1/9] Updating system packages..."
 sudo apt-get update
 sudo apt-get install -y \
   build-essential \
@@ -25,20 +25,24 @@ sudo apt-get install -y \
   nginx
 
 # === Enable I2C ===
-echo "[2/8] Enabling I2C..."
+echo "[2/9] Enabling I2C..."
 sudo raspi-config nonint do_i2c 0
 
+# === Set Timezone ===
+echo "[3/9] Setting timezone to America/Los_Angeles..."
+sudo timedatectl set-timezone America/Los_Angeles
+
 # === Create Project Directory ===
-echo "[3/8] Setting up project directory at $PROJECT_DIR"
+echo "[4/9] Setting up project directory at $PROJECT_DIR"
 mkdir -p "$PROJECT_DIR"
 cd "$PROJECT_DIR"
 
 # === Copy Backend Code ===
-echo "[4/8] Copying backend code..."
+echo "[5/9] Copying backend code..."
 cp "$REPO_DIR/Backend_Code/backend.py" "$PROJECT_DIR/backend.py"
 
 # === Create Virtual Environment and Install Python Dependencies ===
-echo "[5/8] Creating virtual environment..."
+echo "[6/9] Creating virtual environment..."
 python3 -m venv environment
 source "$PYTHON_ENV/bin/activate"
 echo "[6/8] Installing Python packages..."
@@ -46,12 +50,12 @@ pip3 install --upgrade pip
 pip3 install adafruit-circuitpython-ahtx0 flask flask-cors
 
 # === Setup NGINX ===
-echo "[7/8] Configuring NGINX..."
+echo "[7/9] Configuring NGINX..."
 sudo cp "$REPO_DIR/NGINX_Setup/default" /etc/nginx/sites-available/default
 sudo systemctl restart nginx
 
 # === Deploy HTML Frontend Files ===
-echo "[8/8] Deploying frontend files..."
+echo "[8/9] Deploying frontend files..."
 sudo cp "$REPO_DIR/Frontend_Code/index.html" /var/www/html/index.html
 sudo cp "$REPO_DIR/Frontend_Code/history.html" /var/www/html/history.html
 
