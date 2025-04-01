@@ -8,9 +8,10 @@ Input the Following into the Terminal (after you SSH into the Pi):
 2. cd AHT21/
 3. chmod +x install.sh
 4. ./install.sh
+
 (Optional if you want to uninstall)
-5. chmod +x uninstall.sh
-6. ./uninstall.sh
+6. chmod +x uninstall.sh
+7. ./uninstall.sh
 
 
 
