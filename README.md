@@ -3,7 +3,7 @@ Tutorial to create a temperature and humidity sensor using AHT21 and Raspberry P
 
 **Note: Names of Files, passwords, IDs, and Directories (location files are in) are important!**
 ## Quick Install (Terminal/SSH)
-Input the Following into the Terminal: 
+Input the Following into the Terminal (after you SSH into the Pi): 
 1. git clone https://github.com/Nagacan/AHT21.git
 2. cd AHT21/
 3. chmod +x install.sh
