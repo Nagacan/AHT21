@@ -27,7 +27,7 @@ echo "[3/4] Deleting frontend files from /var/www/html..."
 sudo rm -f /var/www/html/index.html
 sudo rm -f /var/www/html/history.html
 
-# === Restore NGINX default config (optional, backup first if needed) ===
+# === Restore NGINX default config ===
 echo "[4/4] Restoring default NGINX config..."
 sudo apt-get install --reinstall nginx -y
 sudo systemctl restart nginx
