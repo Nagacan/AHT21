@@ -19,6 +19,7 @@ sudo systemctl daemon-reload
 
 # === Remove Project Directory ===
 echo "[2/4] Removing project directory at $PROJECT_DIR..."
+cd ~      
 rm -rf "$PROJECT_DIR"
 
 # === Remove frontend HTML files ===
