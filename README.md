@@ -2,6 +2,12 @@
 Tutorial to create a temperature and humidity sensor using AHT21 and Raspberry Pi Zero W. 
 
 **Note: Names of Files, passwords, IDs, and Directories (location files are in) are important!**
+## Quick Install (Terminal/SSH)
+1. git clone https://github.com/Nagacan/AHT21.git
+2. cd AHT21/
+3. chmod +x install.sh
+4. ./install.sh
+
 
 ## Materials:
 Raspberry Pi Zero WH (W= Wireless, H= Headers (already soldered on))
