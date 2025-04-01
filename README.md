@@ -10,8 +10,8 @@ Input the Following into the Terminal (after you SSH into the Pi):
 4. ./install.sh
 
 (Optional if you want to uninstall)
-6. chmod +x uninstall.sh
-7. ./uninstall.sh
+1. chmod +x uninstall.sh
+2. ./uninstall.sh
 
 
 
