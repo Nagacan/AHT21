@@ -2,6 +2,7 @@
 
 # === Basic Variables ===
 USERNAME=$(whoami)
+REPO_DIR=$(pwd)
 PROJECT_DIR="/home/$USERNAME/AHT21"
 PYTHON_ENV="$PROJECT_DIR/environment"
 SERVICE_TEMPLATE="SystemD/backend.service"
@@ -34,7 +35,7 @@ cd "$PROJECT_DIR"
 
 # === Copy Backend Code ===
 echo "[4/8] Copying backend code..."
-cp ../Backend_Code/backend.py "$PROJECT_DIR/backend.py"
+cp "$REPO_DIR/Backend_Code/backend.py" "$PROJECT_DIR/backend.py"
 
 # === Create Virtual Environment and Install Python Dependencies ===
 echo "[5/8] Creating virtual environment..."
@@ -46,17 +47,17 @@ pip3 install adafruit-circuitpython-ahtx0 flask flask-cors
 
 # === Setup NGINX ===
 echo "[7/8] Configuring NGINX..."
-sudo cp ../NGINX_Setup/default /etc/nginx/sites-available/default
+sudo cp "$REPO_DIR/NGINX_Setup/default" /etc/nginx/sites-available/default
 sudo systemctl restart nginx
 
 # === Deploy HTML Frontend Files ===
 echo "[8/8] Deploying frontend files..."
-sudo cp ../Frontend_Code/index.html /var/www/html/index.html
-sudo cp ../Frontend_Code/history.html /var/www/html/history.html
+sudo cp "$REPO_DIR/Frontend_Code/index.html" /var/www/html/index.html
+sudo cp "$REPO_DIR/Frontend_Code/history.html" /var/www/html/history.html
 
 # === Setup systemd Service ===
 echo "[9/9] Configuring backend service..."
-sed "s|%u|$USERNAME|g" "$SERVICE_TEMPLATE" | sudo tee "$SERVICE_DEST" > /dev/null
+sed "s|%u|$USERNAME|g" "$REPO_DIR/SystemD/backend.service" | sudo tee "$SERVICE_DEST" > /dev/null
 sudo systemctl daemon-reload
 sudo systemctl enable backend.service
 sudo systemctl start backend.service
