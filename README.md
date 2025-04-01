@@ -30,11 +30,29 @@ Micro SD-Card Reader/Adapter
 [Adapter](https://www.amazon.com/Reader-Adapter-Camera-Memory-Wansurs/dp/B0B9QZ4W4Y?crid=1NRJQU9RFIEUX&dib=eyJ2IjoiMSJ9.aZ5CyI1seaCTFVUzT0NlJpD8dyQjzqiqAURiyClSNrH2BGRKFKbUrMzzF59pt43S0IFH3E6I00N6K6GSyrhpmx3imwonNx4xzcFtk9ZzN4DJMNFZl6cg6qMy5rCOA6W2LOXlkYWOTcdxbBAmjkMfaEBSL3PMtZakDS_UNtSwuSrGZeT5n0gP3ZLp572kA636_A4iDL-Rms6Z5qR8qW5fw_pHX3N3wMLKtk3T0xdtz6U.9WVDsjNrwOKz5CJDiLGtSr47cc6gQd7MSiG2myKHeTE&dib_tag=se&keywords=micro+sd+card+adapter&qid=1740176655&sprefix=micro+sd+card+adapt%2Caps%2C207&sr=8-4)
 
 ## Setting Up the Raspberry Pi (headless)
-Download, Raspberry Pi Imager, and flash it on your raspberry pi SD card
-In services, enable SSH and use Password Auth, you can set that hostname to anything I will uncheck it. set your username and password to anything - mine is admin, admin, and configuer wireless LAN (used to connect to your own hotspot or wifi)
+### 1. Flash Raspberry Pi OS
+1. Use Raspberry Pi Imager to flash Raspberry Pi OS onto your SD card.
+2. In the imager settings:
+      1. Enable SSH (Password Auth)
+      2. 
+
+Set your hostname (or leave default raspberrypi)
+
+Set username/password (e.g., admin/admin)
+
+Configure Wireless LAN (SSID and password)
+
+Set country: US, timezone: America/Los_Angeles, keyboard: US
+
+    1. enable SSH
+    2.  and use Password Auth, you can set that hostname to anything I will uncheck it. set your username and password to anything - mine is admin, admin, and configuer wireless LAN (used to connect to your own hotspot or wifi)
 I will use eduroam, and password, as the SSID and password. WIreless LAN country as US. America los angelos as local settings, and keyboard as US. Telemetry can be enabled (mine is checked). Apply the change (this will wipe eveyrthing previously on it). Should take a few minutes to finish. Take a picture or something of these settings. You will need them.
 Once it's finished. Go into the file bootfs folder, and then make two text files. One name it as "ssh", and nothing else , and the other "wpa_supplicant.txt" (or download and import the supplicant file I'm using)- you want to have everything in there the same and adjusted to your own settings. Once you're done, or whenever u want you can change it to "wpa_supplicant.conf", however you migth need an application to access it.
-
+ 1. First item
+2. Second item
+3. Third item
+1. Indented item
+    2. Indented item
 . Then eject the Sd card from your computter and put it in the RPI, and then plug your RPI in using a micro usb cable. It might take a while to connect. And sometimes, since it's an intial start up, it won't connect. I would reccomend you to plug it in, leave it in with the hotspot on (automatically connects) for about 5 minutes. Then if nothing shows up connected, unplug it, and replug. After waiting about 5 mins, I unplug and replugged it in and it connected to my hotspot after about 2 minutes. 
 
 to ssh (secure shell (protocol); remotely connect; the raspberry pi is a microcomputer) into the PI go to the command terminal and type "ssh raspberrypi.local"; this is because I unchcked the host name as a result it's the default name, if you have a personal name for it use "ssh username@hostname.local", "ssh username@<IP_ADDRESS>" if you have the IP address of the PI. The username is the username you previously set (with it's password)
