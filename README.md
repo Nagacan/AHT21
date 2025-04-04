@@ -35,7 +35,7 @@ Micro-USB Cable and USB Power Supply (any is fine)
 [Micro-USB Cable](https://www.amazon.com/Charging-Transfer-Android-Trustable-MYFON/dp/B098DW7485?crid=2KGXKFFMHT4LZ&dib=eyJ2IjoiMSJ9.WR63mKTxAJQICRAe9uZ2APmoXscPxGk0W7TyUC7zUOepA-mpjv4JSKc1TkT1jRBtRmhycVZ-cl4f3JYFXJR7O3_LLi8tkEZYT5f7mRLzJFfMCqghjIbRt4eznJGgL9yjrhd1zb7qvKVPF-RDueImDUPlszzwvTUlVjFaRiWpCVwkkyDuAYS4zCI0-1Tmf3UU56BfcM_TKoSWlt88bGwOz5jYuJS3tRJJiZg0mCpGFHg.CrI8OwJtEzEehjiZbrl8bqo9uIz5VVNQopMxnrXjyEE&dib_tag=se&keywords=micro%2Busb&qid=1740176049&sprefix=micro%2Bus%2Caps%2C424&sr=8-4&th=1)
  | [Power Supply with Micro-USB](https://www.amazon.com/Bawofu-Supply-Charger-Adapter-Universal/dp/B0BSF3TB8P?crid=GUN3N529THFG&dib=eyJ2IjoiMSJ9.lYhV7VDm_2PdWXB38EVtA02ZZ7iTnEt0e1GHHrJR7H-A7YUYv8pu5nxWQ7iMlAVJMPfazuqkRkG1BzAlhpBj4AjYpgJcEcc16EPM8PTqiW1PBQR6Drh13yWa1on5Gw0jTePA4rHzNEF3PaHFvhK9I9OuBv8BXpHlIZpUg0alz7NwJFWD_JH4RpYLw4iHFJc9go3ukDCHMC6_hDzy22HaQ24OA6pjEWbc4NFmOJ38OWE.BmYW0u6zvDPYID3bANagd9w2uxxxoVkdTjy3aoZ5TI8&dib_tag=se&keywords=usb+power+supply+micro+usb&qid=1740176249&sprefix=usb+power+supply+micro+us%2Caps%2C195&sr=8-3)
 
-Micro SD-Card (I used 16gbs)
+Micro SD-Card (I used 16 and 32gbs)
 
 [Micro SD-Card](https://www.amazon.com/Center-Memory-Adapter-Mobile-Storage/dp/B08HD83TFJ?crid=2BQCKLHXHA5EH&dib=eyJ2IjoiMSJ9.Uwx19gT9ffNa_idEUNhHLJndkVLmxwwGnyqGY6G1drtN2FIqpZ_wLSP502zU4lT5zjOn7B-wRiLJ6fMHJoWHX165Mj-_fy6-B2s90l42A_S-AtgFJkagv_ywZk8Ex1R8fuDYqfwqa3CWecMKt1EXu0eRoirFcVh3iZrlrp6LsC19x1RwCJnKUxmdas0dDScssYJNrI4B4kqLAXwkg6KeI4XM28WHZFKjpsGHCEmv0Ec.xecKIXm0zfVyXNANv6De-CHw-tlmf1NerkyQ6wCURds&dib_tag=se&keywords=micro+sd+card+16gb+microcenter&qid=1740176570&sprefix=micro+sd+card+16gb+microcente%2Caps%2C182&sr=8-1)
 
