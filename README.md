@@ -50,6 +50,7 @@ Micro SD-Card Reader/Adapter
   <img src="https://m.media-amazon.com/images/I/61+RVpqV5AL._AC_UF1000,1000_QL80_.jpg" height="400" />
 </p>
 
+#### Use Male to Female Pins (Connect Male to Sensor/Breadboard, and Females to GPIO Pins on RPi)
 1. VCC (or VIN) on the Sensor to 3.3V on the Pi
 2. GND (Ground) on the Sensor to Ground on the Pi
 3. SDA (Data) on the Sensor to GPIO2 (SDA1) on the Pi
