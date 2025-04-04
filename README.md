@@ -9,7 +9,7 @@ Input the Following into the Terminal (after you SSH into the Pi):
 3. chmod +x install.sh
 4. ./install.sh
 
-(Optional if you want to uninstall)
+(Optional if you want to uninstall; skip step 1/2 below if already did above)
 1. git clone https://github.com/Nagacan/AHT21.git
 2. cd AHT21/
 3. chmod +x uninstall.sh
