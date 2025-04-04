@@ -43,6 +43,18 @@ Micro SD-Card Reader/Adapter
 
 [Adapter](https://www.amazon.com/Reader-Adapter-Camera-Memory-Wansurs/dp/B0B9QZ4W4Y?crid=1NRJQU9RFIEUX&dib=eyJ2IjoiMSJ9.aZ5CyI1seaCTFVUzT0NlJpD8dyQjzqiqAURiyClSNrH2BGRKFKbUrMzzF59pt43S0IFH3E6I00N6K6GSyrhpmx3imwonNx4xzcFtk9ZzN4DJMNFZl6cg6qMy5rCOA6W2LOXlkYWOTcdxbBAmjkMfaEBSL3PMtZakDS_UNtSwuSrGZeT5n0gP3ZLp572kA636_A4iDL-Rms6Z5qR8qW5fw_pHX3N3wMLKtk3T0xdtz6U.9WVDsjNrwOKz5CJDiLGtSr47cc6gQd7MSiG2myKHeTE&dib_tag=se&keywords=micro+sd+card+adapter&qid=1740176655&sprefix=micro+sd+card+adapt%2Caps%2C207&sr=8-4)
 
+## Connections
+https://peppe8o.com/raspberry-pi-zero-pinout/ 
+<p align="center">
+  <img src="https://peppe8o.com/wp-content/uploads/2020/09/Raspberry-PI-Zero-Pinout-schema.jpg" height="200" />
+  <img src="https://m.media-amazon.com/images/I/61+RVpqV5AL._AC_UF1000,1000_QL80_.jpg" height="200" />
+</p>
+
+1. VCC (or VIN) on the Sensor to 3.3V on the Pi
+2. GND (Ground) on the Sensor to Ground on the Pi
+3. SDA (Data) on the Sensor to GPIO2 (SDA1) on the Pi
+4. SCL (Clock) on the sensor to GPIO3 (SCL1) on the Pi
+
 ## Setting Up the Raspberry Pi (headless)
 ### 1. Flash Raspberry Pi OS
 1. Use Raspberry Pi Imager to flash Raspberry Pi OS onto your SD card.
