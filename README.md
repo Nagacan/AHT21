@@ -59,31 +59,31 @@ Micro SD-Card Reader/Adapter
 3. SDA (Data) on the Sensor to GPIO2 (SDA1) on the Pi
 4. SCL (Clock) on the sensor to GPIO3 (SCL1) on the Pi
 
+# Detailed Guide
+
 ## Setting Up the Raspberry Pi (headless)
 ### 1. Flash Raspberry Pi OS
 1. Use Raspberry Pi Imager to flash Raspberry Pi OS onto your SD card.
 2. In the imager settings:
       1. Enable SSH (Password Auth)
-      2. 
 
 Set your hostname (or leave default raspberrypi)
-
 Set username/password (e.g., admin/admin)
-
 Configure Wireless LAN (SSID and password)
-
 Set country: US, timezone: America/Los_Angeles, keyboard: US
-
     1. enable SSH
     2.  and use Password Auth, you can set that hostname to anything I will uncheck it. set your username and password to anything - mine is admin, admin, and configuer wireless LAN (used to connect to your own hotspot or wifi)
-I will use eduroam, and password, as the SSID and password. WIreless LAN country as US. America los angelos as local settings, and keyboard as US. Telemetry can be enabled (mine is checked). Apply the change (this will wipe eveyrthing previously on it). Should take a few minutes to finish. Take a picture or something of these settings. You will need them.
-Once it's finished. Go into the file bootfs folder, and then make two text files. One name it as "ssh", and nothing else , and the other "wpa_supplicant.txt" (or download and import the supplicant file I'm using)- you want to have everything in there the same and adjusted to your own settings. Once you're done, or whenever u want you can change it to "wpa_supplicant.conf", however you migth need an application to access it.
- 1. First item
-2. Second item
-3. Third item
-1. Indented item
-    2. Indented item
-. Then eject the Sd card from your computter and put it in the RPI, and then plug your RPI in using a micro usb cable. It might take a while to connect. And sometimes, since it's an intial start up, it won't connect. I would reccomend you to plug it in, leave it in with the hotspot on (automatically connects) for about 5 minutes. Then if nothing shows up connected, unplug it, and replug. After waiting about 5 mins, I unplug and replugged it in and it connected to my hotspot after about 2 minutes. 
+I will use eduroam, and password, as the SSID and password. 
+WIreless LAN country as US. 
+America los angelos as local settings, and keyboard as US. 
+Telemetry can be enabled (mine is checked). 
+Apply the change (this will wipe eveyrthing previously on it). Should take a few minutes to finish.
+Take a picture or something of these settings. You will need them.
+Once it's finished. Go into the file bootfs folder, and then make two text files. 
+One name it as "ssh", and nothing else , and the other "wpa_supplicant.txt" (or download and import the supplicant file I'm using)- you want to have everything in there the same and adjusted to your own settings. 
+Once you're done, or whenever u want you can change it to "wpa_supplicant.conf", however you migth need an application to access it.
+
+Then eject the Sd card from your computter and put it in the RPI, and then plug your RPI in using a micro usb cable. It might take a while to connect. And sometimes, since it's an intial start up, it won't connect. I would reccomend you to plug it in, leave it in with the hotspot on (automatically connects) for about 5 minutes. Then if nothing shows up connected, unplug it, and replug. After waiting about 5 mins, I unplug and replugged it in and it connected to my hotspot after about 2 minutes. 
 
 to ssh (secure shell (protocol); remotely connect; the raspberry pi is a microcomputer) into the PI go to the command terminal and type "ssh raspberrypi.local"; this is because I unchcked the host name as a result it's the default name, if you have a personal name for it use "ssh username@hostname.local", "ssh username@<IP_ADDRESS>" if you have the IP address of the PI. The username is the username you previously set (with it's password)
 
@@ -98,21 +98,18 @@ then reboot the pi, usingn sudo reboot
 
  “sudo apt install -y build-essential git libi2c-dev i2c-tools” which is basically just downloading the libraries. (-y automatically confirms the installation, so you don’t have to manually type Y when prompted.)
 - build-essential – Installs essential development tools, including:
-
-    gcc (GNU C Compiler)
-    g++ (GNU C++ Compiler)
-    make (build automation tool)
-    Other development utilities
+- gcc (GNU C Compiler)
+- g++ (GNU C++ Compiler)
+- make (build automation tool)
+- Other development utilities
 
 git – Installs Git, a version control system used for cloning and managing repositories.
-
 libi2c-dev – Installs development libraries for working with the I²C (Inter-Integrated Circuit) protocol, allowing your Raspberry Pi to communicate with I²C devices.
-
 i2c-tools – Installs utilities to interact with I²C devices from the command line, such as:
-    i2cdetect (scan for I²C devices)
-    i2cget (read from an I²C device)
-    i2cset (write to an I²C device)
-    i2cdump (dump contents of an I²C device)
+- i2cdetect (scan for I²C devices)
+- i2cget (read from an I²C device)
+- i2cset (write to an I²C device)
+- i2cdump (dump contents of an I²C device)
 
 Now you need to install the senesor library, for this you need to make a virtual environment. because Debian-based systems (including Raspberry Pi OS)  use a stricter package management system to prevent conflicts between system-installed and user-installed Python packages
 Type this into the terminal
@@ -182,7 +179,6 @@ Install a database:
 sudo apt install sqlite3
 pip install flask-cors
 
-
 Create the backend 
 sudo nano backend.py, and replace everything in here with the file provided or just import the file i provided in that directory (directory and name of the file matters)
 
@@ -198,6 +194,3 @@ Once you're done. sudo systemctl daemon-reload to restart the service and do the
 sudo systemctl enable backend.service       -enables the service
 sudo systemctl start backend2.service       -starts the service 
 sudo systemctl status backend2.service    -checks status of the service
-
-fixed some of the databases and locations of the addresses in the backend and the system file code. 
-Previously my backend also didn't create a table in the sqlite database so I've included that
