@@ -191,7 +191,7 @@ sudo systemctl restart nginx
 ```
 
 ### 7. Access your site
-1. Find your Pi's IP and Visit ('http://<YOUR_PI_IP>'):
+1. Find your Pi's IP and Visit `(http://<YOUR_PI_IP>)`:
 ```
 hostname -I
 ```
