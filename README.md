@@ -74,9 +74,10 @@ Micro SD-Card Reader/Adapter
 
 ### 2. Additional Boot Setup
 1. After flashing, open the `bootfs` partition on the SD card
-2. Add the following files (or import from the one's I already provided on the repository):
+2. Add the following files (or download/import from the one's I already provided in the folder: `RaspberryPi_Setup` for this Repository):
    * a blank file named `ssh`
    * a `wpa_supplicant.conf` file (or `.txt`, rename later if needed) with your specific Wi-Fi config
+*If you're using the uploaded config file I provided be sure to edit the contents and change accordingly*
 
 ### 3. Boot and Connect
 1. Insert the SD card into the Pi and power via micro USB
