@@ -64,133 +64,138 @@ Micro SD-Card Reader/Adapter
 ## Setting Up the Raspberry Pi (headless)
 ### 1. Flash Raspberry Pi OS
 1. Use Raspberry Pi Imager to flash Raspberry Pi OS onto your SD card.
-2. In the imager settings:
-      1. Enable SSH (Password Auth)
+2. In the Configure OS imager settings:
+   * Set your hostname (default: raspberrypi)
+   * Set Username/Pass (e.g., admin/admin)
+   * Configure Wireless LAN (Wifi/Hotspot SSID and Password)
+   * Set country: US, timezone: America/Los_Angeles, keyboard: US
+   * Enable SSH (Password Auth)
+3. Click save and flash the SD card. This will erase all existing content
 
-Set your hostname (or leave default raspberrypi)
-Set username/password (e.g., admin/admin)
-Configure Wireless LAN (SSID and password)
-Set country: US, timezone: America/Los_Angeles, keyboard: US
-    1. enable SSH
-    2.  and use Password Auth, you can set that hostname to anything I will uncheck it. set your username and password to anything - mine is admin, admin, and configuer wireless LAN (used to connect to your own hotspot or wifi)
-I will use eduroam, and password, as the SSID and password. 
-WIreless LAN country as US. 
-America los angelos as local settings, and keyboard as US. 
-Telemetry can be enabled (mine is checked). 
-Apply the change (this will wipe eveyrthing previously on it). Should take a few minutes to finish.
-Take a picture or something of these settings. You will need them.
-Once it's finished. Go into the file bootfs folder, and then make two text files. 
-One name it as "ssh", and nothing else , and the other "wpa_supplicant.txt" (or download and import the supplicant file I'm using)- you want to have everything in there the same and adjusted to your own settings. 
-Once you're done, or whenever u want you can change it to "wpa_supplicant.conf", however you migth need an application to access it.
+### 2. Additional Boot Setup
+1. After flashing, open the `bootfs` partition on the SD card
+2. Add the following files (or import from the one's I already provided on the repository):
+   * a blank file named `ssh`
+   * a `wpa_supplicant.conf` file (or `.txt`, rename later if needed) with your specific Wi-Fi config
 
-Then eject the Sd card from your computter and put it in the RPI, and then plug your RPI in using a micro usb cable. It might take a while to connect. And sometimes, since it's an intial start up, it won't connect. I would reccomend you to plug it in, leave it in with the hotspot on (automatically connects) for about 5 minutes. Then if nothing shows up connected, unplug it, and replug. After waiting about 5 mins, I unplug and replugged it in and it connected to my hotspot after about 2 minutes. 
+### 3. Boot and Connect
+1. Insert the SD card into the Pi and power via micro USB
+2. Wait ~5-10 mins. If it doesn't connect to Wi-Fi, unplug and retry/wait.
+   * If still doesn't work may be issue with your Wi-Fi configuration
+3. SSH into the Pi using CMD Terminal, Or Putty (3rd party app)
+   * Default `ssh pi@raspberrypi.local`
+   * Custom: `ssh <username>@<hostname>.local` or  `<username>@<IP_ADDRESS>`
+4. Accept the SSH Key fingerprint and login with your password (It won't show that you're typing anything)
+  
+## Initial Configuration
+1. Run these commands (one after another) into the terminal
+```
+sudo apt-get update
+sudo raspi-config
+```
+   1. Change password (`System Options -> Password`)
+   2. Enable I2C (`Interfacing Options -> I2C -> Enable`)
+2. Reboot:
+```
+sudo reboot
+```
+3. Install Depdencies:
+```
+sudo apt install -y build-essential git libi2c-dev i2c-tools
+```
+What These Do:
+* build-essential: gcc, g++, make, and other dev tools
+* git: Clone and manage repositories
+* 2c-dev / i2c-tools: I²C support and tools like i2cdetect
 
-to ssh (secure shell (protocol); remotely connect; the raspberry pi is a microcomputer) into the PI go to the command terminal and type "ssh raspberrypi.local"; this is because I unchcked the host name as a result it's the default name, if you have a personal name for it use "ssh username@hostname.local", "ssh username@<IP_ADDRESS>" if you have the IP address of the PI. The username is the username you previously set (with it's password)
-
-type y then enter to continue connecting. It will give you a fingerprint, type yes, you don't need this and there are ways to find the Pi's fingerprint. Type in your password (note here when you type the password it won't show anything, or indicate that you are typing). Once done with password type enter. 
-
-Update software to the latest version using “sudo apt-get update”
-Using “sudo raspi-config” changed the password to make sure it was “paul393875” and you can configure it in system configure and then change password.
-before you do anything as well.
-do the sudo raspi config
-Go to:Interfacing Options → I2C → Enable
-then reboot the pi, usingn sudo reboot
-
- “sudo apt install -y build-essential git libi2c-dev i2c-tools” which is basically just downloading the libraries. (-y automatically confirms the installation, so you don’t have to manually type Y when prompted.)
-- build-essential – Installs essential development tools, including:
-- gcc (GNU C Compiler)
-- g++ (GNU C++ Compiler)
-- make (build automation tool)
-- Other development utilities
-
-git – Installs Git, a version control system used for cloning and managing repositories.
-libi2c-dev – Installs development libraries for working with the I²C (Inter-Integrated Circuit) protocol, allowing your Raspberry Pi to communicate with I²C devices.
-i2c-tools – Installs utilities to interact with I²C devices from the command line, such as:
-- i2cdetect (scan for I²C devices)
-- i2cget (read from an I²C device)
-- i2cset (write to an I²C device)
-- i2cdump (dump contents of an I²C device)
-
-Now you need to install the senesor library, for this you need to make a virtual environment. because Debian-based systems (including Raspberry Pi OS)  use a stricter package management system to prevent conflicts between system-installed and user-installed Python packages
-Type this into the terminal
-mkdir ~/AHT21 #(this makes a folder in the directory called AHT21; to keep everything organized)
-then go into tthe folder with cd AHT21/ ## important, always remember to go into this folder, to get access to the folders etc, or clarify your directory/file location.
-
-python3 -m venv environment (this makes a vietual eniroment called environemnt) (this one might take a minute about 2-3 ), then type into the terminal 
-source environment/bin/activate (activate and uses the environemnt, download the external libraries and installations here)
-
-then "pip3 install adafruit-circuitpython-ahtx0" - will take a while, about 2-3 or maybe 5 mins. if it says warning retrying after connection broken don't worry, just leave it and let it finish. Be sure not to press any buttons or disturb it (cntrl c kills the command)
-Every time you want to use this environment, activate it with:
-
+### 4. Sensor Setup (AHT21)
+1. Create Virtual Environment
+```
+mkdir ~/AHT21
+cd ~/AHT21
+python3 -m venv environment
 source environment/bin/activate
-"deactivate" if you want to get out
+```
+2. Install Sensor Library
+```
+pip3 install adafruit-circuitpython-ahtx0
+```
+*Note: Ignore warnings like "retrying after connection broken." Just wait.*
 
-isntall flask 
-pip3 install flask (might takke 5 minis)
-
-https://nginx.org/en/linux_packages.html#Debian
-follow this website
-Do everything it says under Debian in the putty terminal, inside the correct directory and virtual environment 
-
+### 5. Install Flask and NGINX
+1. Install flask
+```
+pip3 install flask flask-cors
+```
+2. Install NGINX by following [NGINX](https://nginx.org/en/linux_packages.html#Debian) Debian Instructions or use commands below:
+```
 sudo apt install curl gnupg2 ca-certificates lsb-release debian-archive-keyring
 
 curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
-    | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+  | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
 
-gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
+gpg --dry-run --quiet --no-keyring --import --import-options import-show \
+  /usr/share/keyrings/nginx-archive-keyring.gpg
 
 echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
 http://nginx.org/packages/debian `lsb_release -cs` nginx" \
-    | sudo tee /etc/apt/sources.list.d/nginx.list
+  | sudo tee /etc/apt/sources.list.d/nginx.list
 
-(apt repository for stable nginx packages) OR (mainline nginx packages) - doesnt matter (i just installed both)
-    
+# Optionally add mainline repo
 echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
 http://nginx.org/packages/mainline/debian `lsb_release -cs` nginx" \
-    | sudo tee /etc/apt/sources.list.d/nginx.list
+  | sudo tee /etc/apt/sources.list.d/nginx.list
 
 echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
-    | sudo tee /etc/apt/preferences.d/99nginx
+  | sudo tee /etc/apt/preferences.d/99nginx
 
-then to install nginx
+# Install NGINX
 sudo apt update
 sudo apt install nginx
+```
 
-if you want to find out your hostname or ip address type into the terminal
-hostname or hostname -I
-
-After nginx is installed you can access your website on 
-http://<<IP_Address_Here>>
-or just type your IP address into the brwoser
-
-remmber cd AHT21/
-then source environment/bin/activate
-to get into the folder/directory and then actiavting the envinroment
-
-http://192.168.137.8/ is my page
-
-Creating the system file, backend, and frontends (make sure  you do all of this in the AHT21/ directory, and in your environment just to be safe). 
-backedn:
-Configure Nginx as a reverse proxy to point to your Flask app. Edit the Nginx configuration file to forward requests from /data to your Flask backend in your virtual environment 
-sudo nano /etc/nginx/sites-available/default
-(replace everything in this file with everything in the file i provided in NGINX_setup, or just import the file I provided and replace it with the one already there)
-
-Install a database:
+### 5. Backend and Frontend Configuration
+1. Setup Flask App and SystemD Service
+2. Go to the your project folder and create/import (Import the Backend Folder in my repository) Flask Backend
+```
+cd ~/AHT21
+source environment/bin/activate
+sudo nano backend.py
+```
+3. Install SQLite
+```
 sudo apt install sqlite3
-pip install flask-cors
+```
+4. Setup Systemd Service file (or import from the provided folder)
+```
+sudo nano /etc/systemd/system/backend.service
+```
+5. Reload and enable the service
+```
+sudo systemctl daemon-reload
+sudo systemctl enable backend.service
+sudo systemctl start backend.service
+sudo systemctl status backend.service
+```
 
-Create the backend 
-sudo nano backend.py, and replace everything in here with the file provided or just import the file i provided in that directory (directory and name of the file matters)
-
-Do the same with the two front ends
+### 6. Web Frontend Pages
+1. Create/Import these HTML Files
+```
 sudo nano /var/www/html/index.html
 sudo nano /var/www/html/history.html
+```
+2. Configure NGINX config (Replace with file provided) and restart 
+```
+sudo nano /etc/nginx/sites-available/default
+sudo systemctl restart nginx
+```
 
-Do the same for the system file (This is important though, you may need to change the directory and address accordingly), so go into the system (backend.service) file that I provided and read the directioins
-or in other words, just change all of the hostnames to your hostname. 
-sudo nano /etc/systemd/system/backend.service
+### 7. Access your site
+1. Find your Pi's IP and Visit ('http://<YOUR_PI_IP>'):
+```
+hostname -I
+```
+**Always activate your virtual environment before running Python code:**
+*  ` source environment/bin/activate `
+*  use `deactivate` to exit the environment
 
-Once you're done. sudo systemctl daemon-reload to restart the service and do these in order
-sudo systemctl enable backend.service       -enables the service
-sudo systemctl start backend2.service       -starts the service 
-sudo systemctl status backend2.service    -checks status of the service
