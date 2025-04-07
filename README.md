@@ -48,8 +48,8 @@ Micro SD-Card Reader/Adapter
 ## Connections
 [RPi Pinout](https://www.theengineeringprojects.com/2021/03/what-is-raspberry-pi-zero-pinout-specs-projects-datasheet.html)
 <p align="center">
-  <img src="https://images.theengineeringprojects.com/image/webp/2021/03/raspberry-pi-zero-5.png.webp?ssl=1" height="400" />
-  <img src="https://m.media-amazon.com/images/I/61+RVpqV5AL._AC_UF1000,1000_QL80_.jpg" height="400" />
+  <img src="https://images.theengineeringprojects.com/image/webp/2021/03/raspberry-pi-zero-5.png.webp?ssl=1" height="350" />
+  <img src="https://m.media-amazon.com/images/I/61+RVpqV5AL._AC_UF1000,1000_QL80_.jpg" height="350" />
 </p>
 
 **_Use Male to Female Pins (Connect Male to Sensor/Breadboard, and Females to GPIO Pins on RPi)_**
