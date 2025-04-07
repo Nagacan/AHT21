@@ -1,13 +1,13 @@
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+    listen 80 default_server;         # Listen on port 80 for HTTP (IPv4)
+    listen [::]:80 default_server;    # Listen on port 80 for HTTP (IPv6)
 
-	root /var/www/html;
-	index index.html;
+    root /var/www/html;               # Serve static files from this directory
+    index index.html;                 # Default file to load
 
-	server_name _;
+    server_name _;                    # Catch-all server name (for any domain/IP)
 
-	location /data {
-    	proxy_pass http://127.0.0.1:5000;
-	}
+    location /data {                  # For requests to /data...
+        proxy_pass http://127.0.0.1:5000;  # ...forward them to Flask backend
+    }
 }
