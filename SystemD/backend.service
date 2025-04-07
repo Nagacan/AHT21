@@ -1,13 +1,20 @@
 [Unit]
 Description=Temperature and Humidity Sensor Backend
-After=network.target # Ensures your service starts after networking is up 
+After=network.target 
+# Ensures your service starts after networking is up 
 
 [Service]
-ExecStart=/home/%u/AHT21/environment/bin/python3 /home/%u/AHT21/backend.py # Launches your Python script using your virtual environment's python3
-WorkingDirectory=/home/%u/AHT21 # Ensures relative paths in your script (like your DB file) work.
-Restart=always # Restarts automatically if the process crashes
-User=%u # Run as the user who started the service 
-Environment=PYTHONUNBUFFERED=1 # Makes Python print logs in real-time instead of buffering them
+ExecStart=/home/%u/AHT21/environment/bin/python3 /home/%u/AHT21/backend.py 
+WorkingDirectory=/home/%u/AHT21 
+Restart=always 
+User=%u 
+Environment=PYTHONUNBUFFERED=1 
+# Launches your Python script using your virtual environment's python3
+# Ensures relative paths in your script (like your DB file) work.
+# Restarts automatically if the process crashes
+# Run as the user who started the service 
+# Makes Python print logs in real-time instead of buffering them
 
 [Install]
-WantedBy=multi-user.target # Once the system is fully booted, and all core services (like networking) are up and running, start this service
+WantedBy=multi-user.target 
+# Once the system is fully booted, and all core services (like networking) are up and running, start this service
