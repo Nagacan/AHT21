@@ -4,9 +4,8 @@ Tutorial to create a temperature and humidity sensor using AHT21 and Raspberry P
 - Live temperature and humidity graph every 2 seconds
 - Historical graph with the ability to view previous dates
 - Downloadable data and sortable historical data table
-- Automatic data logging starts as soon as the Raspberry Pi is powered on
+- Automatic data logging starts as soon as the Raspberry Pi is powered on 
 - Local web interface becomes available once the Pi is connected to Wi-Fi
-- No need to SSH or run commands manually after unplugging and replugging the Pi
 - Smart disk monitoring: Automatically deletes old data when storage is low
 - Timezone auto-configuration via systemd
 - Fully autonomous: no user interaction needed after power-up
