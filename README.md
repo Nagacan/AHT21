@@ -94,13 +94,9 @@ Micro SD-Card Reader/Adapter
 sudo apt-get update
 sudo raspi-config
 ```
-   1. Change password (`System Options -> Password`)
-   2. Enable I2C (`Interfacing Options -> I2C -> Enable`)
-2. Reboot:
-```
-sudo reboot
-```
-3. Install Depdencies:
+* Change password (`System Options -> Password`)
+* Enable I2C (`Interfacing Options -> I2C -> Enable`)
+2. Install Dependencies:
 ```
 sudo apt install -y build-essential git libi2c-dev i2c-tools
 ```
@@ -108,9 +104,13 @@ What These Do:
 * build-essential: gcc, g++, make, and other dev tools
 * git: Clone and manage repositories
 * 2c-dev / i2c-tools: I²C support and tools like i2cdetect
-4. Adjust the time to your region. LA as an example is below.
+3. Adjust the time to your region. LA as an example is below.
 ```
 sudo timedatectl set-timezone America/Los_Angeles 
+```
+4. Reboot:
+```
+sudo reboot
 ```
 
 ### 4. Sensor Setup (AHT21)
