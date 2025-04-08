@@ -2,7 +2,7 @@
 Description=Temperature and Humidity Sensor Backend
 After=network.target 
 # Ensures your service starts after networking is up 
-
+# Replace the %u with your username
 [Service]
 ExecStart=/home/%u/AHT21/environment/bin/python3 /home/%u/AHT21/backend.py 
 WorkingDirectory=/home/%u/AHT21 
