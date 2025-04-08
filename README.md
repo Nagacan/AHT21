@@ -175,6 +175,7 @@ sudo apt install sqlite3
 ```
 sudo nano /etc/systemd/system/backend.service
 ```
+* Remember to replace with your Username
 5. Reload and enable the service
 ```
 sudo systemctl daemon-reload
