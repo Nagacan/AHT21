@@ -130,6 +130,7 @@ cd ~/AHT21
 python3 -m venv environment
 source environment/bin/activate
 ```
+*For the rest of the guide, you must be in this directory and environment*
 2. Install Sensor Library
 ```
 pip3 install adafruit-circuitpython-ahtx0
