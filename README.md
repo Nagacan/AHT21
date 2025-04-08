@@ -161,7 +161,7 @@ sudo apt install nginx
 
 ### 5. Backend and Frontend Configuration
 1. Setup Flask App and SystemD Service
-2. Go to the your project folder and create/import (Import the Backend Folder in my repository) Flask Backend
+2. Go to the your project folder and create/import (Import the Backend Folder in my repository `Backend_Code`) Flask Backend
 ```
 cd ~/AHT21
 source environment/bin/activate
@@ -171,7 +171,7 @@ sudo nano backend.py
 ```
 sudo apt install sqlite3
 ```
-4. Setup Systemd Service file (or import from the provided folder)
+4. Setup Systemd Service file (or import from `SystemD`)
 ```
 sudo nano /etc/systemd/system/backend.service
 ```
@@ -184,12 +184,12 @@ sudo systemctl status backend.service
 ```
 
 ### 6. Web Frontend Pages
-1. Create/Import these HTML Files
+1. Create/Import these HTML Files `Frontend_Code`
 ```
 sudo nano /var/www/html/index.html
 sudo nano /var/www/html/history.html
 ```
-2. Configure NGINX config (Replace with file provided) and restart 
+2. Configure NGINX config (or import from `NGINX_Setup`) and restart 
 ```
 sudo nano /etc/nginx/sites-available/default
 sudo systemctl restart nginx
