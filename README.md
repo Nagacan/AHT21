@@ -108,6 +108,10 @@ What These Do:
 * build-essential: gcc, g++, make, and other dev tools
 * git: Clone and manage repositories
 * 2c-dev / i2c-tools: I²C support and tools like i2cdetect
+4. Adjust the time to your region. LA as an example is below.
+```
+sudo timedatectl set-timezone America/Los_Angeles 
+```
 
 ### 4. Sensor Setup (AHT21)
 1. Create Virtual Environment
