@@ -24,7 +24,22 @@ Input the Following into the Terminal (after you SSH into the Pi):
 3. chmod +x uninstall.sh
 4. ./uninstall.sh
 
+## Resets/Debugging
+If the webpage doesnt load ssh into the PI, or there is an error with backend
+1. ssh into the PI
+2. `cd AHT21/`
+3. `source environment/bin/activate`
+4. `sudo systemctl daemon-reload`
+5. `sudo systemctl restart backend.service`
+6. `sudo systemctl status backend.service`
 
+ `journalctl -u backend.service -n 20 --no-pager` - is used for checking logs 
+ 
+ ` journalctl -u backend.service -f `  - is used for live logs
+
+ `systemctl is-active backend.service ` - check only if it’s running
+
+` i2cdetect -y 1 ` - used to check addresses for I2c on bus 1
 
 ## Materials:
 Raspberry Pi Zero WH (W= Wireless, H= Headers (already soldered on))
